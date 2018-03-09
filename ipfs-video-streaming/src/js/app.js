@@ -2,67 +2,59 @@ App = {
   web3Provider: null,
   contracts: {},
 
-  init: function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
+  init: function () {
+    $.getJSON("/playlists").then(function (files) {
+      for (i = 0; i < files.length; i++) {
+        playlist = files[i]
+        var playlistsRow = $('#playlistsRow');
+        var playlistsTemplate = $('#playlistsTemplate');
 
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+        playlistsTemplate.find('.link').attr('href', '/play.html?video='+playlist);
+        playlistsTemplate.find('.link').text(playlist)
 
-        petsRow.append(petTemplate.html());
+        playlistsRow.append(playlistsTemplate.html());
       }
+
+    })
+
+    App.bindEvents();
+  },
+
+  bindEvents: function () {
+    $(document).on('click', '.btn-pay', App.handleAdopt);
+    $(document).on('click', '.btn-submit', App.handleClickUpload);
+  },
+
+  handleClickUpload: function () {
+    document.getElementById('loader').style = "visibility:visible;"
+  },
+
+  handleAdopt: function () {
+    var payInstance;
+
+    web3.eth.getAccounts(function (error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+
+      var account = accounts[0]
+
+      App.contracts.Pay.deployed().then(function (instance) {
+        payInstance = instance;
+
+        return payInstance.pay({ from: account });
+
+      }).then(function (result) {
+        document.find('button').text('Success').attr('disabled', true);
+      }).catch(function (err) {
+        console.log(err.message);
+      });
     });
-
-    return App.initWeb3();
-  },
-
-  initWeb3: function() {
-    /*
-     * Replace me...
-     */
-
-    return App.initContract();
-  },
-
-  initContract: function() {
-    /*
-     * Replace me...
-     */
-
-    return App.bindEvents();
-  },
-
-  bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
-  },
-
-  markAdopted: function(adopters, account) {
-    /*
-     * Replace me...
-     */
-  },
-
-  handleAdopt: function(event) {
-    event.preventDefault();
-
-    var petId = parseInt($(event.target).data('id'));
-
-    /*
-     * Replace me...
-     */
   }
-
 };
 
-$(function() {
-  $(window).load(function() {
+$(function () {
+  $(window).load(function () {
     App.init();
   });
 });
