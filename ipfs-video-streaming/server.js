@@ -31,7 +31,7 @@ app.use('/playlists', function (req, res, next) {
 app.use('/fileupload', function (req, res, next) {
   var form = new formidable.IncomingForm();
   form.parse(req, function (err, fields, files) {
-
+    console.log(files)
     var name = files.filetoupload.name.substring(0, files.filetoupload.name.indexOf('.'))
     var oldpath = files.filetoupload.path;
     var outputDirectory = './uploads/' + name;
