@@ -16,7 +16,7 @@ var ipfs = ipfsAPI('localhost', '5001', {protocol: 'http'})
 // const IPFS = require('ipfs')
 // const ipfs = new IPFS()
 
-const defaultPlaylistName = "index.m3u8"
+const defaultPlaylistName = "master.m3u8"
 
 var app = express()
 
@@ -30,8 +30,8 @@ app.use('/playlists', function (req, res, next) {
 
 app.use('/fileupload', function (req, res, next) {
   var form = new formidable.IncomingForm();
+  console.log(form)
   form.parse(req, function (err, fields, files) {
-    console.log(files)
     var name = files.filetoupload.name.substring(0, files.filetoupload.name.indexOf('.'))
     var oldpath = files.filetoupload.path;
     var outputDirectory = './uploads/' + name;
