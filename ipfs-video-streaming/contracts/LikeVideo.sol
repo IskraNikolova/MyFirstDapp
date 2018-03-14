@@ -1,18 +1,14 @@
 pragma solidity ^0.4.18;
 
 contract LikeVideo {
-    address[16] private fans;
-    
-    // Like video
-    function like(uint videoId) public returns (uint) {
-        require(videoId >= 0);
-        fans[videoId] = msg.sender;
-        
-        return videoId;
-    }
-  
-    // Retrieving the fans
-    function getFans() public view returns (address[16]) {
-        return fans;
-    }
+  address[16] public adopters;
+
+  // Adopting a pet
+  function adopt(uint petId) public returns (uint) {
+    require(petId >= 0 && petId <= 15);
+
+    adopters[petId] = msg.sender;
+
+    return petId;
+  }
 }

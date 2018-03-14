@@ -1,5 +1,5 @@
-var LikeVideo = artifacts.require("LikeVideo");
+var ERC20Token = artifacts.require("./ERC20Token.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(LikeVideo);
+  deployer.deploy(ERC20Token);
 };

@@ -38,8 +38,9 @@ App = {
       }
 
       var account = accounts[0]
-
+     console.alert(account)
       App.contracts.Pay.deployed().then(function (instance) {
+        console.alert(instance)
         payInstance = instance;
 
         return payInstance.pay({ from: account });
