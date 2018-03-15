@@ -57,7 +57,7 @@ App = {
         }
   
         var sender = accounts[0]
-        var to  = "0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f"
+        var to  = "0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef"
         var value = 2
          
         App.contracts.ERC20Token.deployed().then(function(instance) {

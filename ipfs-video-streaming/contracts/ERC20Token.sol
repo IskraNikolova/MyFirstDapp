@@ -3,7 +3,6 @@ pragma solidity ^0.4.18;
 import './SimpleToken.sol';
 
 contract ERC20Token is SimpleToken {
-   
    function () {
         //if ether is sent to this address, send it back.
         throw;
