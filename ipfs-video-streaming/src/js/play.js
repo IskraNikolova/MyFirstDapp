@@ -57,12 +57,12 @@ App = {
         }
   
         var sender = accounts[0]
-        console.log(sender)
-        var to  = "0x2c2b9c9a4a25e24b174f26114e8926a9f2128fe4"
+        var to  = "0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f"
         var value = 2
          
         App.contracts.ERC20Token.deployed().then(function(instance) {
           tokenContract = instance;
+          console.log(tokenContract)
           return tokenContract.transfer(to, value)
           .then((txHash) => {
             console.log('Success')

@@ -1,16 +1,19 @@
 pragma solidity ^0.4.18;
 
 import './Token.sol';
+import './SafeMath.sol';
 
 contract SimpleToken is Token {
+    using SafeMath for uint256;
+    
     mapping (address => uint256) balances;
     mapping (address => mapping (address => uint256)) allowed;
     uint256 public totalSupply;
 
     function transfer(address _to, uint256 _value) returns (bool success) {
         if (balances[msg.sender] >= _value && _value > 0) {
-            balances[msg.sender] -= _value;
-            balances[_to] += _value;
+            balances[msg.sender] = balances[msg.sender].sub(_value);
+            balances[_to] = balances[_to].add(_value);
             Transfer(msg.sender, _to, _value);
             return true;
         } else { return false; }
@@ -18,9 +21,9 @@ contract SimpleToken is Token {
 
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
         if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && _value > 0) {
-            balances[_to] += _value;
-            balances[_from] -= _value;
-            allowed[_from][msg.sender] -= _value;
+            balances[_to] = balances[_to].add(_value);
+            balances[_from] = balances[_from].sub(_value);
+            allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
             Transfer(_from, _to, _value);
             return true;
         } else { return false; }
