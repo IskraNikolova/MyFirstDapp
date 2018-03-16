@@ -49,6 +49,7 @@ App = {
     },
   
     handlePay: function () {
+
       var payInstance;
   
       web3.eth.getAccounts(function (error, accounts) {
@@ -64,7 +65,8 @@ App = {
           tokenContract = instance;
           console.log(tokenContract)
           return tokenContract.transfer(to, value)
-          .then((txHash) => {
+          .then((txHash) => {           
+            console.log(localStorage.get('hash'))
             console.log('Success')
           })
           .catch((err) => {

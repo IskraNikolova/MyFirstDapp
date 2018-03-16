@@ -9,7 +9,7 @@ App = {
         var playlistsRow = $('#playlistsRow');
         var playlistsTemplate = $('#playlistsTemplate');
 
-        playlistsTemplate.find('.link').attr('href', '/play.html?video='+playlist);
+        playlistsTemplate.find('.link').attr('href', '/play.html?video=' + playlist);
         playlistsTemplate.find('.link').text(playlist)
 
         playlistsRow.append(playlistsTemplate.html());
