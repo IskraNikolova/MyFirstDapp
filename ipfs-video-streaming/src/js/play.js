@@ -63,21 +63,27 @@ App = {
         }
   
         var sender = accounts[0]
-        var to  = App.senderVideo;
+        var to  = App.senderVideo;      
         var value = 2
          
         App.contracts.ERC20Token.deployed().then(function(instance) {
           tokenContract = instance;
-          console.log(tokenContract)
           return tokenContract.transfer(to, value)
           .then((txHash) => {           
             console.log('Success')
+            App.getVideo()
           })
           .catch((err) => {
             console.error('Error', err)
           });
         });
       })
+    },
+
+    getVideo: function(){
+      $.get(`video/${App.ipfsHash}`).then(
+        console.log("gotovo")
+      )
     }
   };
 

@@ -38,6 +38,28 @@ app.use('/playlists', function (req, res, next) {
   res.send(JSON.stringify(fs.readdirSync("./playlists")));
 })
 
+app.use('/video/:ipfsHash', function (req, res) { 
+  let ipfsHash = req.params.ipfsHash;
+
+  //TODO
+  ipfs.files.get(ipfsHash, function (err, files) {
+     console.log(files)
+  })
+
+  const stream = ipfs.files.getReadableStream(ipfsHash)
+
+  stream.on('data', (file) => {
+    // write the file's path and contents to standard out
+    console.log(file.path)
+    if(file.type !== 'dir') {
+      file.content.on('data', (data) => {
+        console.log(data.toString())
+      })
+      file.content.resume()
+    }
+  })
+})
+
 app.use('/hashes/:name', function (req, res) { 
   res.send(JSON.parse(fs.readFileSync(`./hashes/${req.params.name}`, 'utf8')))
 })
@@ -54,11 +76,11 @@ app.use('/fileupload', function (req, res, next) {
     mkdirp(outputDirectory)
 
     ffmpeg(oldpath, { timeout: 432000 })
-      .addOption('-profile:v', 'baseline')
+      //.addOption('-profile:v', 'baseline')
       .addOption('-level', 3.0)
       .addOption('-s', '640x360')
       .addOption('-start_number', 0)
-      .addOption('-hls_time', 5)
+      .addOption('-hls_time', 10)
       .addOption('-hls_list_size', 0)
       .format('hls')
       .on('start', function (cmd) {
