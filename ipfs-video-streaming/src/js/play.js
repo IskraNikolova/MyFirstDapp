@@ -49,7 +49,6 @@ App = {
     },
   
     handlePay: function () {
-
       var payInstance;
   
       web3.eth.getAccounts(function (error, accounts) {
