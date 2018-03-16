@@ -16,10 +16,12 @@ App = {
           var index = playlist.indexOf('.');
           var name = playlist.substring(0, index);
           var hash = "";
+          var sender = "";
           $.getJSON(`/hashes/${name}.json`).then(function (file) {
-            hash = file.hash;
+            hash = file.ipfsHash;
+            sender = file.sender;
             console.log(hash)
-            playlistsTemplate.find('.link').attr('href', `/play.html?video=${playlist}&hash=${hash}`);
+            playlistsTemplate.find('.link').attr('href', `/play.html?video=${playlist}&hash=${hash}&sender=${sender}`);
             playlistsTemplate.find('.link').text(playlist)       
             playlistsRow.append(playlistsTemplate.html());
             console.log("done")

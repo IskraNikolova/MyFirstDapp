@@ -1,10 +1,16 @@
 App = {
     web3Provider: null,
     contracts: {},
+    ipfsHash: "",
+    senderVideo: "",
   
     init: function () {
       var video = document.getElementById('video');
       var playlist = new URLSearchParams(window.location.search).get("video")
+      var hash = new URLSearchParams(window.location.search).get("hash")
+      var address = new URLSearchParams(window.location.search).get("sender")
+      App.ipfsHash = hash;
+      App.senderVideo = address;
   
       if (Hls.isSupported()) {
         var hls = new Hls();
@@ -56,9 +62,8 @@ App = {
           console.log(error);
         }
   
-        
         var sender = accounts[0]
-        var to  = "0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef"
+        var to  = App.senderVideo;
         var value = 2
          
         App.contracts.ERC20Token.deployed().then(function(instance) {
@@ -66,7 +71,6 @@ App = {
           console.log(tokenContract)
           return tokenContract.transfer(to, value)
           .then((txHash) => {           
-            console.log(localStorage.get('hash'))
             console.log('Success')
           })
           .catch((err) => {
