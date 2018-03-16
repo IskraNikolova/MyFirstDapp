@@ -20,8 +20,13 @@ const defaultPlaylistName = "master.m3u8"
 const web3AccountAddress = "";
 var app = express()
 
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
 app.use(serveStatic(path.join(__dirname, 'src')))
 app.use(serveStatic(path.join(__dirname, 'playlists')))
+app.use(serveStatic(path.join(__dirname, 'hashes')))
 app.use(serveStatic(path.join(__dirname, 'uploads')))
 app.use(serveStatic(path.join(__dirname, 'build/contracts')))
 
@@ -31,6 +36,10 @@ app.use(multer({
 
 app.use('/playlists', function (req, res, next) { 
   res.send(JSON.stringify(fs.readdirSync("./playlists")));
+})
+
+app.use('/hashes/:name', function (req, res) { 
+  res.send(JSON.parse(fs.readFileSync(`./hashes/${req.params.name}`, 'utf8')))
 })
 
 app.use('/fileupload', function (req, res, next) {
@@ -116,7 +125,7 @@ function uploadToIpfs(outputDirectory, name, path, file) {
         })
         
         //Save hash for ipfs address in json file
-        let text = `{"name": "${name}", "hash": "${fileForDownload.hash}, "sender": "${this.web3AccountAddress}"}`;
+        let text = `{"name": "${name}", "ipfsHash": "${fileForDownload.hash}, "sender": "${this.web3AccountAddress}"}`;
         let hashData = JSON.parse(text);
 
         fs.writeFile("./hashes/" + name + ".json", JSON.stringify(hashData), function(err) { 

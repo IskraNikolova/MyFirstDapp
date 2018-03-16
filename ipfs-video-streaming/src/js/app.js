@@ -1,23 +1,34 @@
 App = {
   web3Provider: null,
   contracts: {},
+  playlistsName: [],
 
   init: function () {
-    $.getJSON("/playlists").then(function (files) {
-      for (i = 0; i < files.length; i++) {
-        playlist = files[i]
-        var playlistsRow = $('#playlistsRow');
-        var playlistsTemplate = $('#playlistsTemplate');
-
-        playlistsTemplate.find('.link').attr('href', '/play.html?video=' + playlist);
-        playlistsTemplate.find('.link').text(playlist)
-
-        playlistsRow.append(playlistsTemplate.html());
-      }
-    })
-
-    App.bindEvents();
-  },
+     var request = $.getJSON("/playlists").then(function (files) {
+        App.playlistsName = files;
+      }).done(function () {
+        for(let file = 0; file < App.playlistsName.length; file++){
+          var playlistsRow = $('#playlistsRow');
+          var playlistsTemplate = $('#playlistsTemplate');
+          let playlist = App.playlistsName[file]
+          console.log(playlist)
+          //Get name of file
+          var index = playlist.indexOf('.');
+          var name = playlist.substring(0, index);
+          var hash = "";
+          $.getJSON(`/hashes/${name}.json`).then(function (file) {
+            hash = file.hash;
+            console.log(hash)
+            playlistsTemplate.find('.link').attr('href', `/play.html?video=${playlist}&hash=${hash}`);
+            playlistsTemplate.find('.link').text(playlist)       
+            playlistsRow.append(playlistsTemplate.html());
+            console.log("done")
+            console.log(playlist)
+          });
+        
+        }})
+        App.bindEvents();
+    },
 
   bindEvents: function () {
     $(document).on('click', '.btn-pay', App.handleAdopt);
