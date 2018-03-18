@@ -1,0 +1,17 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:13
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:13.180711,
+http://localhost:8080/ipfs/Qmc8yCK7xBrwtW8DpwuzecSdqA4CKC3Rf8gfb8hC8dmigE
+#EXTINF:6.840622,
+http://localhost:8080/ipfs/QmT4mi5gQpoUBpMkBLjBk2qsmVNemjWLuMnzHZF6BEDYJH
+#EXTINF:10.552911,
+http://localhost:8080/ipfs/QmRsEgGt2GVYg6Sqo39N28uSrMSfe9GJwWviVSd1EdTK4t
+#EXTINF:10.010667,
+http://localhost:8080/ipfs/QmZtbHHNgLungUgwejidF7u2gebJufSvBqpZAAWdGCGvqt
+#EXTINF:9.468422,
+http://localhost:8080/ipfs/Qmcc3rRC7DVFX2sXDAueUZ2H8Bj85UBZZkSyHmZem4BvUx
+#EXTINF:9.968956,
+http://localhost:8080/ipfs/Qme1dYqP95HBuxuBLsAFrf6rXbagRH6eMQgQ3mDSUhbCc6
+#EXT-X-ENDLIST

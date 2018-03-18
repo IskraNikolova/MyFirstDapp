@@ -51,7 +51,8 @@ App = {
     },
   
     bindEvents: function () {
-      $(document).on('click', '.btn-pay', App.handlePay);
+      $(document).on('click', '.btn-like', App.handlePay);
+      $(document).on('click', '#download', App.getVideo);
     },
   
     handlePay: function () {
@@ -81,9 +82,10 @@ App = {
     },
 
     getVideo: function(){
-      $.get(`video/${App.ipfsHash}`).then(
-        console.log("gotovo")
-      )
+        $("#download").attr('href', `http://localhost:8080/ipfs/${App.ipfsHash}`)
+      //$.get(`video/${App.ipfsHash}`).then(
+       // console.log("gotovo")
+      //)
     }
   };
 

@@ -38,27 +38,44 @@ app.use('/playlists', function (req, res, next) {
   res.send(JSON.stringify(fs.readdirSync("./playlists")));
 })
 
-app.use('/video/:ipfsHash', function (req, res) { 
-  let ipfsHash = req.params.ipfsHash;
+//app.use('/video/:ipfsHash', function (req, res, next) { 
+  //let ipfsHash = req.params.ipfsHash;
+  
+  //getVideoFromIpfs(ipfsHash).then(function (err) {       
+   // if (!err) { 
+    //    res.redirect(301, "/");
+     //   res.end();
+   // }
+ // })
 
-  //TODO
-  ipfs.files.get(ipfsHash, function (err, files) {
-     console.log(files)
-  })
+  //function getVideoFromIpfs(ipfsHash){
+   // return new Promise(function (resolve, reject) {
 
-  const stream = ipfs.files.getReadableStream(ipfsHash)
 
-  stream.on('data', (file) => {
-    // write the file's path and contents to standard out
-    console.log(file.path)
-    if(file.type !== 'dir') {
-      file.content.on('data', (data) => {
-        console.log(data.toString())
-      })
-      file.content.resume()
-    }
-  })
-})
+    //  const stream = ipfs.files.getReadableStream(`/ipfs/${ipfsHash}`)
+
+     // const validCID = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
+
+      //ipfs.files.get(validCID, function (err, files) {
+       // files.forEach((file) => {
+      //   console.log(file.path)
+      //    console.log(file.content.toString('utf8'))
+      //  })
+     // })
+
+
+
+     // ipfs.files.get(ipfsHash, function (err, file) {
+       // if (!err) {
+        //  console.log(file)
+         // console.log("get from ipfs")
+      //  } else { 
+        //  resolve(err)
+       // }
+     //})
+   // })
+ // }  
+//})
 
 app.use('/hashes/:name', function (req, res) { 
   res.send(JSON.parse(fs.readFileSync(`./hashes/${req.params.name}`, 'utf8')))
@@ -101,6 +118,8 @@ app.use('/fileupload', function (req, res, next) {
       })
       .save(outputDirectory + "/" + defaultPlaylistName)
   });
+
+
 
 function uploadToIpfs(outputDirectory, name, path, file) {
   return new Promise(function (resolve, reject) {
