@@ -83,9 +83,6 @@ App = {
 
     getVideo: function(){
         $("#download").attr('href', `http://localhost:8080/ipfs/${App.ipfsHash}`)
-      //$.get(`video/${App.ipfsHash}`).then(
-       // console.log("gotovo")
-      //)
     }
   };
 
