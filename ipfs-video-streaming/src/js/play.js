@@ -56,8 +56,7 @@ App = {
     },
   
     handlePay: function () {
-      var payInstance;
-  
+      var payInstance; 
       web3.eth.getAccounts(function (error, accounts) {
         if (error) {
           console.log(error);
@@ -72,7 +71,7 @@ App = {
           return tokenContract.transfer(to, value)
           .then((txHash) => {           
             console.log('Success')
-            App.getVideo()
+            $("#download").css("display", "block")
           })
           .catch((err) => {
             console.error('Error', err)
@@ -81,7 +80,7 @@ App = {
       })
     },
 
-    getVideo: function(){
+    getVideo: function(){      
         $("#download").attr('href', `http://localhost:8080/ipfs/${App.ipfsHash}`)
     }
   };
