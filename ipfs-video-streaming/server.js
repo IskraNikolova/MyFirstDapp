@@ -44,7 +44,6 @@ app.use('/hashes/:name', function (req, res) {
 
 app.use('/fileupload', function (req, res, next) {
   var files = req.files;
-  console.log(req.body)
   web3AccountAddress = req.body.web3AccountAddress;
   var name = files[0].originalname.substring(0, files[0].originalname.indexOf('.'))
   var oldpath = files[0].path;

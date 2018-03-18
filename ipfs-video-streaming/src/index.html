@@ -24,8 +24,9 @@
     <div class="page-header thumbnail">
         <img src="http://www.promotionmedia.co.uk/wp-content/uploads/2015/10/video-marketing-picture-e1445582215284.jpg"/>
     </div>
+
     <div class="row">
-         <div class="col-xs-12 col-sm-8 col-sm-push-2">    
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">    
         <h1 class="text-center">Video Online</h1>
         <hr/>
         <br/>
@@ -34,43 +35,43 @@
 
     <div class="row">
       <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading"><h3>Upload Video And Safe Money</h3></div>
-            <div class="panel-body">
-              <form action="fileupload" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                  <label for="ownerAddress">Address</label>
-                  <input type="text" id="ownerAddress" name="web3AccountAddress" class="form-control" placeholder="Write your address...">
-                  <br>
-                  <input type="file" name="filetoupload" class="form-control" >
-                  <br>
-                  <button type="submit" class="btn btn-default btn-lg">
-                      <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Upload Video
-                  </button>
-                  <!--<input class="btn btn-default" type="submit" value="Upload Video">-->
-                  <img 
-                    src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_512.gif" 
-                    id="loader" 
-                    class="loader"
-                    style="visibility: hidden;"/>
-                </div>
-              </form>
-            </div>
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3>Upload Video And Safe Money</h3></div>
+          <div class="panel-body">
+            <form action="fileupload" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="ownerAddress">Address</label>
+                <input type="text" id="ownerAddress" name="web3AccountAddress" class="form-control" placeholder="Write your address...">
+                <br>
+                <input type="file" name="filetoupload" class="form-control" >
+                <br>
+                <button type="submit" id="uploadVideoButton" style="visibility: visible;" class="btn btn-warning btn-lg btn-mySubmit">
+                    <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Upload Video
+                </button>
+                <img 
+                src="./images/Blocks-1s-200px.gif" 
+                id="loader" 
+                class="loader"
+                style="visibility: hidden;"/>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      
+
       <div class="col-md-6">
-        <div id="playlistsRow" class="row">
-          <!-- PLAYLISTS LOAD HERE -->
-        </div>
-       
-        <html> 
-          <div id="playlistsTemplate" style="display: none;" class="row">
-            <div class="row">
-              <a class="link" href=""> </a>
-            </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Watch Sream Video</h3></div>
+            <div class="panel-body">
+              <div id="playlistsRow" class="row">
+                <!-- PLAYLISTS LOAD HERE -->
+              </div>                
+              <div id="playlistsTemplate" style="display: none;">
+                  <a class="link" href=""></a>
+                  <br>                 
+              </div>
+            </div> 
           </div>
-        </html>
         </script>
       </div>
     </div>

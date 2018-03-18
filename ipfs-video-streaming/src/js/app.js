@@ -34,11 +34,12 @@ App = {
 
   bindEvents: function () {
     $(document).on('click', '.btn-pay', App.handleAdopt);
-    $(document).on('click', '.btn-submit', App.handleClickUpload);
+    $(document).on('click', '.btn-mySubmit', App.handleClickUpload);
   },
 
   handleClickUpload: function () {
     document.getElementById('loader').style = "visibility:visible;"
+    document.getElementById('uploadVideoButton').style = "visibility:hidden;"
   },
 
   handleAdopt: function () {
