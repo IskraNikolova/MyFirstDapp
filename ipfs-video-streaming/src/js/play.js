@@ -6,9 +6,19 @@ App = {
   
     init: function () {
       let video = document.getElementById('video');
-      let playlist = new URLSearchParams(window.location.search).get("video")
-      let hash = new URLSearchParams(window.location.search).get("hash")
-      let address = new URLSearchParams(window.location.search).get("sender")
+      let playlist = new URLSearchParams(window.location.search).get("video");
+      let hash = new URLSearchParams(window.location.search).get("hash");
+      let address = new URLSearchParams(window.location.search).get("sender");
+      let index = playlist.indexOf(".");
+      let name = playlist.substring(0, index);
+
+      $.getJSON(`/hashes/${name}.json`).then(function (file) {
+        let description = file.description;
+        let title = file.title;
+        $("#title").text(title);
+        $("#description").text(description);
+      });
+
       App.ipfsHash = hash;
       App.senderVideo = address;
   
@@ -20,7 +30,6 @@ App = {
           video.play();
         })
       }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        alert("here")
         video.src = playlist;
         video.addEventListener('canplay',function() {
           video.play();

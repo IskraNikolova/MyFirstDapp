@@ -18,6 +18,9 @@ var ipfs = ipfsAPI('localhost', '5001', {protocol: 'http'})
 
 const defaultPlaylistName = "master.m3u8"
 let web3AccountAddress = "";
+let description = "";
+let title = "";
+
 var app = express()
 
 
@@ -44,7 +47,11 @@ app.use('/hashes/:name', function (req, res) {
 
 app.use('/fileupload', function (req, res, next) {
   var files = req.files;
+
   web3AccountAddress = req.body.web3AccountAddress;
+  description = req.body.description;
+  title = req.body.description;
+
   var name = files[0].originalname.substring(0, files[0].originalname.indexOf('.'))
   var oldpath = files[0].path;
   var outputDirectory = './uploads/' + name;
@@ -127,7 +134,13 @@ function uploadToIpfs(outputDirectory, name, path, file) {
         })
         
         //Save hash for ipfs address in json file
-        let text = `{"name": "${name}", "ipfsHash": "${fileForDownload.hash}", "sender": "${web3AccountAddress}"}`;
+        let text = `{
+          "name": "${name}", 
+          "ipfsHash": "${fileForDownload.hash}", 
+          "sender": "${web3AccountAddress}",
+          "title": "${title}, 
+          "description": "${description}"}`;
+
         let hashData = JSON.parse(text);
 
         fs.writeFile("./hashes/" + name + ".json", JSON.stringify(hashData), function(err) { 

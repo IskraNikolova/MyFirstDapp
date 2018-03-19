@@ -1,6 +1,4 @@
 App = {
-  //web3Provider: null,
-  //contracts: {},
   playlistsName: [],
 
   init: function () {
@@ -17,11 +15,12 @@ App = {
           var name = playlist.substring(0, index);
           var hash = "";
           var sender = "";
+          
           $.getJSON(`/hashes/${name}.json`).then(function (file) {
             hash = file.ipfsHash;
             sender = file.sender;
-            console.log(hash)
-            playlistsTemplate.find('.link').attr('href', `/play.html?video=${playlist}&hash=${hash}&sender=${sender}`);
+            playlistsTemplate.find('.link')
+                   .attr('href', `/play.html?video=${playlist}&hash=${hash}&sender=${sender}`);
             playlistsTemplate.find('.link').text(playlist)       
             playlistsRow.append(playlistsTemplate.html());
           });
@@ -39,29 +38,6 @@ App = {
     document.getElementById('loader').style = "visibility:visible;"
     document.getElementById('uploadVideoButton').style = "visibility:hidden;"
   },
-
-  //handleAdopt: function () {
-    //var payInstance;
-
-   // web3.eth.getAccounts(function (error, accounts) {
-    ///  if (error) {
-   //     console.log(error);
-   //   }
-
-   //   var account = accounts[0]
-   //   console.log(account)
-   //   App.contracts.Pay.deployed().then(function (instance) {
-     //   payInstance = instance;
-
-      //  return payInstance.pay({ from: account });
-
-     // }).then(function (result) {
-      //  document.find('button').text('Success').attr('disabled', true);
-     // }).catch(function (err) {
-      //  console.log(err.message);
-     // });
-    //});
- // }
 };
 
 $(function () {
