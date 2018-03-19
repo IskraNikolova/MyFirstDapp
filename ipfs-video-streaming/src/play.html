@@ -9,24 +9,12 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <body>
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div class=row>
-          <div>Ipfs Streaming</div>
-          <video id="video"></video>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <button class="btn btn-lg btn-like btn-info" style="width:150px" type="button">Like</button>
-          </div>
-          <div class="col-md-9">
-            <h4>These sheets of lettering could be rubbed on anywhere.</h4>
-          </div>
-        </div>
+        <div>Ipfs Streaming</div>
+        <video class="thumbnail col-md-12" id="video"></video>
       </div>
       <div class="col-md-4">
           <h1>Five centuries later Lorem Ipsum experienced </h1>
@@ -36,11 +24,15 @@
           <a id="download" class="btn btn-sm btn-success" style="display: none; width:150px" href="">Download</a>
       </div>
     </div>
+    <div class="row">
+      <button class="btn btn-lg btn-like btn-info" style="width:150px" type="button">Like</button>
+      <h4>These sheets of lettering could be rubbed on anywhere.</h4>
+    </div>
   </div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://unpkg.com/hlsjs-ipfs-loader@0.1.1/dist/index.js"></script>
+<!--<script src="https://unpkg.com/hlsjs-ipfs-loader@0.1.1/dist/index.js"></script>-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

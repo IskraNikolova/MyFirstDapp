@@ -5,21 +5,28 @@ App = {
     senderVideo: "",
   
     init: function () {
-      var video = document.getElementById('video');
-      var playlist = new URLSearchParams(window.location.search).get("video")
-      var hash = new URLSearchParams(window.location.search).get("hash")
-      var address = new URLSearchParams(window.location.search).get("sender")
+      let video = document.getElementById('video');
+      let playlist = new URLSearchParams(window.location.search).get("video")
+      let hash = new URLSearchParams(window.location.search).get("hash")
+      let address = new URLSearchParams(window.location.search).get("sender")
       App.ipfsHash = hash;
       App.senderVideo = address;
   
       if (Hls.isSupported()) {
-        var hls = new Hls();
+        let hls = new Hls();
         hls.loadSource(playlist);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
           video.play();
         })
+      }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        alert("here")
+        video.src = playlist;
+        video.addEventListener('canplay',function() {
+          video.play();
+        });
       }
+
       return App.initWeb3();
     },
 

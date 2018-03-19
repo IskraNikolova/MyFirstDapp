@@ -1,6 +1,6 @@
 App = {
-  web3Provider: null,
-  contracts: {},
+  //web3Provider: null,
+  //contracts: {},
   playlistsName: [],
 
   init: function () {
@@ -10,8 +10,8 @@ App = {
         for(let file = 0; file < App.playlistsName.length; file++){
           var playlistsRow = $('#playlistsRow');
           var playlistsTemplate = $('#playlistsTemplate');
-          let playlist = App.playlistsName[file]
-          console.log(playlist)
+          let playlist = App.playlistsName[file];
+
           //Get name of file
           var index = playlist.indexOf('.');
           var name = playlist.substring(0, index);
@@ -24,8 +24,6 @@ App = {
             playlistsTemplate.find('.link').attr('href', `/play.html?video=${playlist}&hash=${hash}&sender=${sender}`);
             playlistsTemplate.find('.link').text(playlist)       
             playlistsRow.append(playlistsTemplate.html());
-            console.log("done")
-            console.log(playlist)
           });
         
         }})
@@ -42,28 +40,28 @@ App = {
     document.getElementById('uploadVideoButton').style = "visibility:hidden;"
   },
 
-  handleAdopt: function () {
-    var payInstance;
+  //handleAdopt: function () {
+    //var payInstance;
 
-    web3.eth.getAccounts(function (error, accounts) {
-      if (error) {
-        console.log(error);
-      }
+   // web3.eth.getAccounts(function (error, accounts) {
+    ///  if (error) {
+   //     console.log(error);
+   //   }
 
-      var account = accounts[0]
-      console.log(account)
-      App.contracts.Pay.deployed().then(function (instance) {
-        payInstance = instance;
+   //   var account = accounts[0]
+   //   console.log(account)
+   //   App.contracts.Pay.deployed().then(function (instance) {
+     //   payInstance = instance;
 
-        return payInstance.pay({ from: account });
+      //  return payInstance.pay({ from: account });
 
-      }).then(function (result) {
-        document.find('button').text('Success').attr('disabled', true);
-      }).catch(function (err) {
-        console.log(err.message);
-      });
-    });
-  }
+     // }).then(function (result) {
+      //  document.find('button').text('Success').attr('disabled', true);
+     // }).catch(function (err) {
+      //  console.log(err.message);
+     // });
+    //});
+ // }
 };
 
 $(function () {
