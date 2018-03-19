@@ -50,7 +50,7 @@ app.use('/fileupload', function (req, res, next) {
 
   web3AccountAddress = req.body.web3AccountAddress;
   description = req.body.description;
-  title = req.body.description;
+  title = req.body.title;
 
   var name = files[0].originalname.substring(0, files[0].originalname.indexOf('.'))
   var oldpath = files[0].path;
@@ -134,12 +134,7 @@ function uploadToIpfs(outputDirectory, name, path, file) {
         })
         
         //Save hash for ipfs address in json file
-        let text = `{
-          "name": "${name}", 
-          "ipfsHash": "${fileForDownload.hash}", 
-          "sender": "${web3AccountAddress}",
-          "title": "${title}, 
-          "description": "${description}"}`;
+        let text = `{"name": "${name}", "ipfsHash": "${fileForDownload.hash}", "sender": "${web3AccountAddress}", "title": "${title}", "description": "${description}"}`;
 
         let hashData = JSON.parse(text);
 
